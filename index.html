@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+    <title>FastAPI App</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">🌟</span>
+                Лого
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('root') }}" class="nav-link">Главная</a></li>
+                <li><a href="{{ url_for('about_us_route') }}" class="nav-link">О нас</a></li>
+                <li><a href="{{ url_for('services_route') }}" class="nav-link">Услуги</a></li>
+                <li><a href="{{ url_for('news_route') }}" class="nav-link">Новости</a></li>
+                <li><a href="{{ url_for('recomends_route') }}" class="nav-link">Рекомендации</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn btn-login">Войти</button>
+            </div>
+
+            <button class="mobile-toggle">☰</button>
+        </nav>
+    </header>
+
+    <main class="content">
+        <h1>Добро пожаловать на наш сайт</h1>
+        <p>Прокрутите вниз, чтобы увидеть новости</p>
+
+        <div class="conteiner">
+        {% for elem in arr%}
+            <div class="news">
+                <h2 class = "title_nav">{{ elem }}</h2>
+                <p class="text_news">{{ arr[elem][0] }}</p>
+                <div class="info_news">
+                    <p class="data_time">{{ arr[elem][1] }}</p>
+                    <a class="resorses" href="{{ arr[elem][2] }}">Оригинал статьи</a>
+                </div>
+            </div>
+        {%endfor%}        
+        </div>
+    </main>
+
+    
+   
+
+
+    <script>
+        // Мобильное меню
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
